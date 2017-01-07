@@ -5,8 +5,8 @@ master = Tk()
 triangle_size = 0.1
 cell_score_min = -0.2
 cell_score_max = 0.2
-Width = 100
-(x, y) = (5, 5)
+Width = 50#100
+(x, y) = (10, 8)
 actions = ["up", "down", "left", "right"]
 
 board = Canvas(master, width=x*Width, height=y*Width)
@@ -15,8 +15,8 @@ score = 1
 restart = False
 walk_reward = -0.04
 
-walls = [(1, 1), (1, 2), (2, 1), (2, 2)]
-specials = [(4, 1, "red", -1), (4, 0, "green", 1)]
+walls = [(1,1), (1,2), (1,3), (2,4), (3,1), (3,2), (3,3), (6,1), (6,2), (6,3), (7,4), (8,1), (8,2), (8,3)]#[(1, 1), (1, 2), (2, 1), (2, 2)]
+specials = [(2, 3, "red", -1), (7, 3, "green", 1)]#[(4, 1, "red", -1), (4, 0, "green", 1)]
 cell_scores = {}
 
 
@@ -52,6 +52,7 @@ def render_grid():
             for action in actions:
                 temp[action] = create_triangle(i, j, action)
             cell_scores[(i,j)] = temp
+            #print("cell score for: (" + str(i) + ", " + str(j) + ") = " + str(temp))
     for (i, j, c, w) in specials:
         board.create_rectangle(i*Width, j*Width, (i+1)*Width, (j+1)*Width, fill=c, width=1)
     for (i, j) in walls:
